@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Hello, World</title>
+</head>
+
+<body>
+
+    <script>
+
+		/*1. написать функцию padString(string, resultLogin, symbol, side)
+	
+		   padString(Ivan, 8,*, true)
+		   // ivan**** (обычный) если true то ****Ivan */
+
+
+        function padString(stringName, lengthString, symbolFull, side) {
+
+            symbolFull.toString();
+
+            if (symbolFull.length === 1) {
+                if (stringName.length < lengthString) {
+
+                    let name = stringName;
+                    let symbol = "";
+
+                    for (let i = 0; i < lengthString - name.length; i++) {
+                        symbol += symbolFull;
+                    } if (side) {
+                        return symbol + name;
+                    } else {
+                        return name + symbol;
+                    }
+                } else {
+                    return stringName;
+                }
+            } else {
+                return "Введите только 1 символ";
+            }
+        };
+        let login = prompt("Введите ваш логин", "Tom");
+        let length = +prompt("Введите длину строки логина", "10");
+        let symbol = prompt("Введите символ", "@");
+        let tryeFolse = +prompt("Чтобы получить символы в начале строки, введите  любое  число кроме 0  ", " ");
+
+        console.log(padString(login, length, symbol, tryeFolse));
+        alert(padString(login, length, symbol, tryeFolse));
+
+    </script>
+
+</body>
+
+</html>

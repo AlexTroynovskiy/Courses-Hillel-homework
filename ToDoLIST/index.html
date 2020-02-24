@@ -1,0 +1,113 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+         const toDoList = {
+             tasks: [],
+            
+            
+         AddedTask:function(someText) {
+            let unique = this.tasks.some(arr => {
+                    return arr.someText === someText;
+                });
+             if (unique) {
+                    console.log("запись уже есть");
+                    } else {
+                    this.tasks.push({
+                    uniqueId: this.getRandomIntInclusive(),
+                    status: ("undone"),
+                    time: new Date().getTime(),
+                    someText: someText
+                 }) 
+                 }},
+              deleteTask:function(Id) {
+                    this.tasks.findIndex(function (el, index) 
+                    {  if (el.uniqueId === Id) { 
+                        deletedIndex = index; } 
+                        }); 
+                  return  this.tasks.splice(deletedIndex, 1);
+                      },
+              editTask:function(Id, NewText) {
+                  this.tasks.findIndex(function  (el, index)
+                   {   if(Id === el.uniqueId) {
+                     el.someText =  NewText; }
+                          });
+                 },
+                editStatus:function(Id) {
+                    this.tasks.findIndex(function  (el, index)
+                   {   if(Id === el.uniqueId) {
+                        return el.status =  "done"; }
+                     });
+                    
+                    },
+            getRandomIntInclusive() { // получения уникального id
+            let min = Math.ceil(0);
+            let max = Math.floor(10000);
+            return Math.floor(Math.random() * (max - min + 1)) + min; 
+            }  
+
+            }
+
+                toDoList.AddedTask("купить хлеб");
+               toDoList.AddedTask("купить молоко");
+               toDoList.AddedTask("купить воды");
+               toDoList.AddedTask("купить сок");
+               toDoList.AddedTask("купить мак");
+               toDoList.AddedTask("купить мак2");
+        
+               
+            // console.log(toDoList.editTask(1,"выучить js")); 
+            // toDoList.editStatus(2);
+           
+    
+            // toDoList.deleteTask(538); (адишники динамические меняются при обновление смотрет в консоли)
+                
+
+
+               let totalTask = toDoList.tasks.length;  // выводит общее количество задач, сколько выполнили и сколько осталось
+            
+               let DoneTask  = toDoList.tasks.reduce((ac,el )=> { // выводит количество готовы задач
+                   if(el.status === "done") {
+                      ac += 1;
+                   }
+                    return ac;
+               },0)
+
+               let LeftTaskUndone = totalTask - DoneTask ; // кол не готовых задач
+                console.log(LeftTaskUndone);
+               console.log(DoneTask);
+         console.log(totalTask);
+         console.log(toDoList.tasks);
+
+           console.log(LeftTaskUndone) ;
+           
+                  Object.freeze(toDoList) ; 
+
+                  toDoList.tasks = 10    ;
+                     console.log(toDoList.tasks);
+                
+        
+
+
+
+
+        
+       
+       
+
+
+       
+         
+    </script>
+
+</body>
+
+</html>

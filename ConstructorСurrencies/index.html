@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coverter Currency</title>
+    <style>
+        h1 {
+            color: seagreen;
+        }
+
+        input {
+            height: 30px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Converter Currency</h1>
+    <input class="input" type="number" placeholder="Введите сумму в грн">
+    <select class="select">
+
+    </select>
+    <button class="btn" type="button">Обменять</button>
+    <p class="p"></p>
+
+    <script>
+        const url = 'https://old.bank.gov.ua/NBUStatService/v1/statdirectory/exchange?jsons '
+        const input = document.querySelector(".input");
+        const select = document.querySelector('.select');
+        const p = document.querySelector('.p');
+        const option = document.querySelector('.option');
+        const button = document.querySelector('.btn');
+
+        const request = new XMLHttpRequest;
+        request.open('GET', url);
+        request.responseType = 'json';
+        request.onload = () => {
+            console.log(request.response);
+            const data = request.response;
+            data.forEach(element => {
+                console.log(element.txt);
+                let option = document.createElement('option');
+                option.value = element.txt;
+                option.innerText = element.txt;
+                select.appendChild(option);
+                console.log(option);
+            });
+
+            button.addEventListener("click", function () {
+                for (let value of data) {
+                    if (value.txt === select.value) {
+                        let reteValute = value.rate;
+                        let sumUa = input.value;
+                        console.log(reteValute);
+                        if (reteValute.rate < 1) {
+                            let result = sumUa * reteValute;
+                            p.innerText = result;
+                        } else {
+                            result = sumUa / reteValute;
+                            p.innerText = result;
+                        }
+                    }
+                }
+            })
+
+        }
+
+        request.send();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Факты</title>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 48px;
+        }
+
+        .noteInput {
+            width: 400px;
+            height: 48px;
+            padding-right: 12px;
+            padding-left: 12px;
+            margin-right: 24px;
+            font-size: 18px;
+        }
+
+        .addNote,
+        .toggleDone {
+            height: 48px;
+            font-size: 18px;
+        }
+
+        .noteList {
+            width: 555px;
+            padding-left: 0;
+            margin-top: 24px;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .noteList.hideDone .done {
+            display: none;
+        }
+
+
+        .noteItem {
+            display: flex;
+            align-items: flex-start;
+            padding: 8px;
+        }
+
+        .noteItem:not(:last-child) {
+            margin-bottom: 12px;
+        }
+
+        .noteItem.done {
+            background: lightgrey;
+        }
+
+        .noteList.hideDone {
+            display: none;
+        }
+
+        li .noteItem {
+            text-align: center;
+        }
+
+
+
+
+
+        .noteItem.done span {
+            text-decoration: line-through;
+        }
+
+        .noteItem div {
+            display: flex;
+        }
+
+        .noteItem span {
+            margin-right: 24px;
+        }
+
+        .noteItem div {
+            display: flex;
+        }
+    </style>
+    <div class="box">
+        <form>
+            <input type="text" class="noteInput">
+            <button class="addNote"> Add new note</button>
+            <button type="button" class="toggleDone">Hide Done</button>
+        </form>
+
+
+        <ul class="noteList"> </ul>
+    </div>
+
+</body>
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const input = e.target.children[0];
+        console.dir(input.value);
+        const li = document.createElement('li');
+        li.classList.add('noteItem');
+
+        const span = document.createElement('span');
+        li.classList.add('noteItem');
+
+        span.innerText = input.value;
+
+        li.append(span);
+
+        const div = document.createElement('div');
+
+        const checkbox = document.createElement('input');
+        checkbox.setAttribute('type', 'checkbox');
+
+        const button = document.createElement('button');
+        button.innerText = 'Delete';
+        button.classList.add('delete');
+
+        const editButton = document.createElement('button');
+        editButton.innerText = 'Edit';
+        editButton.classList.add('edit');
+        //  editButton.classList.add('edit');
+
+        div.append(checkbox);
+        div.append(button);
+        div.append(editButton);
+        li.append(div);
+
+        const list = document.querySelector('.noteList');
+        list.append(li);
+
+
+        input.value = '';
+
+        /// li.append(div);
+    });
+
+    const list = document.querySelector('.noteList');
+    list.addEventListener('click', e => {
+        const targetEl = e.target;
+
+        if (targetEl.nodeName === 'INPUT') {
+            const li = targetEl.parentNode.parentNode;
+            li.classList.toggle('done');
+        } else if (targetEl.className === 'delete') {
+            const li = targetEl.parentNode.parentNode;
+            const confirmDelete = confirm(
+                `Delete note?`);
+            if (confirmDelete) {
+                li.remove();
+            }
+        } else if (targetEl.className === 'edit') {
+            const note = targetEl.parentNode.parentNode.children[0];
+            if (note.nodeName === 'SPAN') {
+                editNote = prompt('Edit note', note.innerText);
+            }
+            const confirmEdit = confirm(
+                `Save new note?`);
+            if (confirmEdit) {
+                note.innerText = editNote;
+            }
+        }
+    });
+
+
+
+    const hideButton = document.querySelector('.toggleDone');
+    hideButton.addEventListener('click', e => {
+        if (e.target.innerText === 'Hide done') {
+            e.target.innerText = 'Show done';
+        } else {
+            e.target.innerText = 'Hide done';
+        };
+        const list = document.querySelector('.noteList');
+        list.classList.toggle('hideDone');
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+
+        // homework part 2
+        var a = 12,
+            b = 20;
+
+        var c = function (a, b) {
+            return a - b;
+        }
+
+        function f(a = 2, b = 3, c) {
+
+            var sum = function (a, b) {
+                return a + b;
+            }
+
+            var callback = c && typeof c === 'function' ? c : sum;
+
+            return callback(a, b);
+        }
+
+        var res = '';
+        res += 'Without arguments with default callback: ' + f() + '\n';
+        res += 'With arguments with default callback: ' + f(10, 12) + '\n';
+        res += 'With arguments with custom callback: ' + f(10, 6, c) + '\n';
+        res += 'Without arguments with default callback: ' + f(undefined, undefined, c) + '\n';
+
+        alert(res);
+
+
+
+
+    </script>
+</body>
+
+</html>

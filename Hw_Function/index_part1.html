@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		//  homework part 1
+
+		function creatTriangel(max, symbolUser) {
+
+			if (symbolUser.length !== 1) {
+				alert("Нужно вводить  1 символ!");
+			} else {
+				var symbolTriangle = "";
+				var triangle = "";
+				for (var i = 0; i < max; i++) {
+					symbolTriangle += symbolUser;
+					triangle = triangle + "\n" + symbolTriangle;
+				}
+				return triangle;
+			}
+		}
+
+		var height = +prompt("Введите высоту треугольника", "любое целое число");
+		var symbol = prompt("Введите символ", "@");
+
+		console.log(creatTriangel(height, symbol));
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		/*
+		Вам нужно сделать конструктор сущности Студент.
+У Студента есть имя, фамилия, год рождения — это свойства.
+Есть массив с оценками, это тоже свойство.
+И есть возможность получить возраст студента и его средний бал — это методы.
+Еще у всех Студентов есть по массиву одинаковой длины, в нем 30 элементов, изначально он не заполнен, но на 30 элементов. Это массив в котором отмечается посещаемость, каждый раз когда мы вызываем метод .present() на очередное пустое место в массив записывается true, когда вызываем .absent() — записывается false.
+Есть массив с оценками и метод mark(), мы можем передать оценку от 0 до 10. */
+		class Student {
+
+			constructor(name, surname, bDay) {
+				this.name = name;
+				this.surname = surname;
+				this.bDay = bDay;
+				this.marks = new Array(30);
+				this.visit = new Array(30);
+
+			}
+			get getFullAge() {
+				let currentYear = new Date().getFullYear();
+				return currentYear - this.bDay;
+			}
+
+			present() {
+				function isUndefined(elem) {
+					return elem === undefined;
+				}
+				let index = this.visit.findIndex(isUndefined);
+				if (index >= 0) {
+					this.visit[index] = true;
+				} else {
+					console.log('Занятия окончены');
+				}
+			}
+			absent() {
+				let index = this.visit.findIndex((el) => el === undefined);
+				if (index >= 0) {
+					this.visit[index] = false;
+				} else {
+					console.log('Занятия окончены');
+				}
+			}
+			mark = function (n) {   // оценка
+				let index = this.marks.findIndex((el) => el === undefined);
+				if (index >= 0) {
+					this.marks[index] = n;
+				} else {
+					console.log('Занятия окончены');
+				}
+			}
+			totalMarksSum = function () {   // cумма оценок
+				let index = this.marks.findIndex(el => el === undefined);
+				let sumMarks = this.marks.reduce((ac, el) => {
+					if (el !== undefined) {
+						ac += el;
+					}
+					return ac;
+
+				}, 0);
+				return sumMarks;
+			}
+			totalMarks = function () {   // количество оценок
+				let index = this.marks.findIndex(el => el === undefined);
+				let totalMarks = this.marks.reduce((ac, el) => {
+					if (el !== undefined) {
+						ac += 1;
+					}
+					return ac;
+
+				}, 0);
+				return totalMarks;
+			}
+			averageMarks = function () {   // успеваемость среднеея оценка сумму балов делим на количество оценок
+				let AverageMarks1 = this.totalMarksSum() / this.totalMarks();
+				return AverageMarks1;
+			}
+			avarageVisit = function () {
+				let avarageVisit = this.visit.filter(el => el !== undefined).length;
+				return this.visit.reduce((a, b) => a + b) / avarageVisit;
+				console.log(avarageVisit);
+			}
+			result = function () {   // общий результат студента
+				if (this.averageMarks() > 9 && this.avarageVisit() > 0.9) {
+					return "Ути какой молодчинка!";
+				} else if (this.averageMarks() < 9 && this.avarageVisit() > 0.9 || this.averageMarks() > 9 && this.avarageVisit() < 0.9) {
+					return "Норм но можно лучше!";
+				} else {
+					return 'Редиска'
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+		const Oleg = new Student('Oleg', 'Ivanov', 1993);
+		console.log(Oleg.getFullAge);
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.present()
+		Oleg.absent()
+		Oleg.absent()
+		Oleg.present()
+		Oleg.present()
+		Oleg.absent()
+		Oleg.absent()
+
+
+
+
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(10)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		Oleg.mark(9)
+		console.log(Oleg.visit);
+		console.log(Oleg.marks);
+		console.log(Oleg.averageMarks());
+		console.log(Oleg.avarageVisit());
+		console.log(Oleg.result());
+
+	</script>
+
+</body>
+
+</html>

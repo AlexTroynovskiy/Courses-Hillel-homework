@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+ 	<script type="text/javascript">
+		var age = +prompt("Введите ваш возраст"," целое число");
+
+		if ( age >= 1 && age <= 200) {
+ 		
+			if (age % 100 >= 11 && age % 100 <=14) {
+				alert ( "Вам " + age + " лет");
+ 				console.log("Вам " + age + " лет");
+			}	else if (age % 10 == 1) {
+				alert ("Вам " + age + " год" );
+				console.log("Вам " + age + " год");
+			}	else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
+				alert ("Вам " + age + " года");
+ 				console.log("Вам " + age + " года");
+ 			} 	else { 
+ 				alert ("Вам " + age + " лет");
+ 				console.log("Вам " + age + " лет");
+ 			}
+ 		} else {
+ 			alert ("Столько люди не живут");
+ 			console.log("Столько люди не живут");
+ 		}
+	</script>
+</body>
+</html>
